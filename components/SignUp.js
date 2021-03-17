@@ -1,7 +1,17 @@
 import React, { useState }  from 'react'
 import axios from 'axios'
 import { useRouter } from "next/router";
-
+import {
+    Stack,
+    Input,
+    FormControl,
+    InputLeftElement,
+    Icon,
+    InputGroup,
+    Button,
+    FormHelperText,
+  } from "@chakra-ui/react";
+  import { InfoIcon, EmailIcon, LockIcon } from "@chakra-ui/icons";
 
 
 const SignUp = () => {
@@ -42,9 +52,9 @@ const SignUp = () => {
             }
             else if (data.data.status.code === 201) {
                 console.log(data.data)
-                // setTimeout(() => {
-                //     window.location.replace("/profile")
-                //   }, 5000);
+                setTimeout(() => {
+                    window.location.replace("/profile")
+                  }, 5000);
             }
         }).catch((err)=>{
             console.log("error registering user", err)
@@ -52,9 +62,68 @@ const SignUp = () => {
     }
 
     return (
-        <>
-        Form 2
-        </>
+        <form action="submit">
+            <Stack spacing={4}>
+                <FormControl isRequired>
+                    <InputGroup>
+                    <InputLeftElement children={<InfoIcon/>} />
+                    <Input 
+                        type="text"
+                        placeholder="Username"
+                        aria-label="Username"
+                        value={username}
+                        onChange={onChangeUsername}
+                        />
+                    </InputGroup>
+                </FormControl>
+                <FormControl isRequired>
+                    <InputGroup>
+                    <InputLeftElement children={<EmailIcon/>} />
+                    <Input 
+                        type="text"
+                        placeholder="Email"
+                        aria-label="Email"
+                        value={email}
+                        onChange={onChangeEmail}
+                        />
+                    </InputGroup>
+                </FormControl>
+            
+                <FormControl isRequired>
+                    <InputGroup>
+                    <InputLeftElement children={<LockIcon/>} />
+                    <Input 
+                        type="password"
+                        placeholder="Password"
+                        aria-label="Password"
+                        value={password}
+                        onChange={onChangePassword}
+                        />
+                    </InputGroup>
+                </FormControl>
+                <Button
+                    // type="submit"
+                    bg="1"
+                    _hover={{ background: "2", boxShadow: "lg" }}
+              color="white"
+                    variant="solid"
+                    variantColor="red"
+                    boxShadow="sm"
+                    _active={{boxShadow: "lg"}}
+                    onClick={register}
+                    >
+                    Sign Up
+                </Button>
+                <FormHelperText textAlign="center">
+                    Thanks for joining us!
+                    <br></br>
+                    🎾
+                </FormHelperText>
+                {repeatUser && <FormHelperText textAlign="center">
+                    That email is already registered. <br></br> 😢
+                </FormHelperText>}
+            </Stack>
+        </form>
       );
 }
 

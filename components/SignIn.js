@@ -96,7 +96,7 @@ const SignIn = () => {
             onClick={login}
             _active={{ boxShadow: "lg" }}
           >
-            Log In!
+            Log In
           </Button>
           <FormHelperText textAlign="center">
             Happy to see you again!

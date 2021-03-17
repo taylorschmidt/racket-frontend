@@ -8,8 +8,8 @@ return(
     <>
     <Box w="100%" mt={5}>
             <Center>
-            <Box w="350px" bg={colorMode === "light" ? "gray.200" : "gray.600" } p={3} boxShadow="sm" rounded="lg">
-            <Image src= "./security.png" w="80px" mx="auto" my={6}/>
+            <Box w="450px" bg={colorMode === "light" ? "gray.200" : "gray.600" } p={3} boxShadow="sm" rounded="lg">
+            <Image src= "../public/favicon.ico" w="80px" mx="auto" my={6}/>
             <Tabs variant="enclosed-colored" isFitted m={4}>
                 <TabList mt={3}>
                     <Tab>Sign Up</Tab>
