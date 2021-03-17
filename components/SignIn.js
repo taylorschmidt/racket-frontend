@@ -1,118 +1,117 @@
-import React, { useState }  from 'react'
-import axios from 'axios'
+import React, { useState } from "react";
+import axios from "axios";
 import { useRouter } from "next/router";
-
-
+import {
+  Stack,
+  Input,
+  FormControl,
+  InputLeftElement,
+  Icon,
+  InputGroup,
+  Button,
+  FormHelperText,
+} from "@chakra-ui/react";
+import { InfoIcon, EmailIcon, LockIcon } from "@chakra-ui/icons";
 
 const SignIn = () => {
+  const router = useRouter();
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [unknownUser, setUnknownUser] = useState(false);
 
-    const router = useRouter()
-    const [username, setUsername] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+  const onChangeEmail = (e) => {
+    const email = e.target.value;
+    console.log(email);
+    setEmail(email);
+  };
 
+  const onChangePassword = (e) => {
+    const password = e.target.value;
+    setPassword(password);
+  };
+  //axios call here to backend to register
+  const login = (e) => {
+    e.preventDefault();
+    axios
+      .post(
+        "http://localhost:8000" + `/api/v1/user/login`,
+        {
+          email: email,
+          password: password,
+        },
+        { withCredentials: true }
+      )
+      .then((data) => {
+        if (data.data.status.code === 401) {
+          setUnknownUser(true);
+        } else if (data.data.status.code === 200) {
+          setTimeout(() => {
+            window.location.replace("/profile");
+          }, 2000);
+        }
+      })
+      .catch((err) => {
+        console.log("error logging in user", err);
+      });
+  };
 
-    const onChangeEmail = (e) => {
-        const email = e.target.value
-        console.log(email)
-        setEmail(email)
-    }
+  return (
+    <>
+      <form action="submit">
+        <Stack spacing={4}>
+          <FormControl isRequired>
+            <InputGroup>
+              <InputLeftElement children={<EmailIcon />} />
+              <Input
+                type="name"
+                placeholder="Email"
+                aria-label="Email"
+                value={email}
+                onChange={onChangeEmail}
+              />
+            </InputGroup>
+          </FormControl>
+          <FormControl isRequired>
+            <InputGroup>
+              <InputLeftElement children={<LockIcon />} />
+              <Input
+                type="password"
+                placeholder="Password"
+                aria-label="Password"
+                value={password}
+                onChange={onChangePassword}
+              />
+            </InputGroup>
+          </FormControl>
 
-    const onChangePassword = (e) => {
-        const password = e.target.value
-        setPassword(password)
-    }
-    //axios call here to backend to register
-    const login = (e) => {
-        e.preventDefault();
-        axios
-          .post(
-            'http://localhost:8000' + `/api/v1/user/login`,
-            {
-              email: email,
-              password: password,
-            },
-            { withCredentials: true }
-          )
-          .then((data) => {
-            if (data.data.status.code === 401) {
-                setUnknownUser(true)
-            }
-            else if (data.data.status.code === 200) {
-              setTimeout(() => {
-                window.location.replace('/profile')
-              }, 2000);
-               
-            }
-          })
-          .catch((err) => {
-            console.log("error logging in user", err);
-          });
-      };
-    
+          <Button
+            bg="1"
+            _hover={{ background: "2", boxShadow: "lg" }}
+            color="white"
+            type="submit"
+            variant="solid"
+            variantColor="red"
+            boxShadow="sm"
+            onClick={login}
+            _active={{ boxShadow: "lg" }}
+          >
+            Log In!
+          </Button>
+          <FormHelperText textAlign="center">
+            Happy to see you again!
+            <br />
+            🎾
+          </FormHelperText>
+          {unknownUser && (
+            <FormHelperText textAlign="center">
+              Username or password is incorrect! 😢
+            </FormHelperText>
+          )}
+        </Stack>
+      </form>
+    </>
+  );
+};
 
-    return (
-        <>
-        Form
-        </>
-    //     <Container component="main" maxWidth="xs">
-    //       {/* <CssBaseline /> */}
-    //       <div >
-    //         <Typography component="h1" variant="h5">
-    //           Sign in to CourtSide
-    //         </Typography>
-    //         <form noValidate>
-    //           <TextField
-    //             variant="outlined"
-    //             margin="normal"
-    //             required
-    //             fullWidth
-    //             id="email"
-    //             label="Email Address"
-    //             name="email"
-    //             autoComplete="email"
-    //             autoFocus
-    //             value={email}
-    //             onChange={onChangeEmail}
-    //           />
-    //           <TextField
-    //             variant="outlined"
-    //             margin="normal"
-    //             required
-    //             fullWidth
-    //             name="password"
-    //             label="Password"
-    //             type="password"
-    //             id="password"
-    //             autoComplete="current-password"
-    //             value={password}
-    //             onChange={onChangePassword}
-    //           />
-    //           <FormControlLabel
-    //             control={<Checkbox value="remember" color="primary" />}
-    //             label="Remember me"
-    //           />
-    //           <Button
-    //             type="submit"
-    //             fullWidth
-    //             variant="contained"
-    //             color="primary"
-    //             onClick={login}
-                
-    //           >
-    //             Log In 🎾
-    //           </Button>
-    //           <Grid container>
-    //             <Grid item>
-    //               <Link href="#" variant="body2">
-    //                 {"Need to create an account? Sign up!"}
-    //               </Link>
-    //             </Grid>
-    //           </Grid>
-    //         </form>
-    //       </div>
-    //     </Container>
-    );
-}
-
-export default SignIn
+export default SignIn;
