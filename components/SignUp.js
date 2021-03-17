@@ -1,8 +1,7 @@
 import React, { useState }  from 'react'
 import axios from 'axios'
 import { useRouter } from "next/router";
-import { CssBaseline, Container, Avatar, Typography, TextField, FormControlLabel, Checkbox, Copyright, Box, Grid, Link, Button } from '@material-ui/core';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+
 
 
 const SignUp = () => {
@@ -53,76 +52,79 @@ const SignUp = () => {
     }
 
     return (
-        <Container component="main" maxWidth="xs">
-          {/* <CssBaseline /> */}
-          <div >
-            <Typography component="h1" variant="h5">
-              Sign up for CourtSide
-            </Typography>
-            <form noValidate>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                autoFocus
-                value={email}
-                onChange={onChangeEmail}
-              />
-                <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="username"
-                label="Username"
-                type="username"
-                id="username"
-                autoComplete="current-username"
-                value={username}
-                onChange={onChangeUsername}
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                value={password}
-                onChange={onChangePassword}
-              />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                onClick={register}
+        // <Container component="main" maxWidth="xs">
+        //   {/* <CssBaseline /> */}
+        //   <div >
+        //     <Typography component="h1" variant="h5">
+        //       Sign up for CourtSide
+        //     </Typography>
+        //     <form noValidate>
+        //       <TextField
+        //         variant="outlined"
+        //         margin="normal"
+        //         required
+        //         fullWidth
+        //         id="email"
+        //         label="Email Address"
+        //         name="email"
+        //         autoComplete="email"
+        //         autoFocus
+        //         value={email}
+        //         onChange={onChangeEmail}
+        //       />
+        //         <TextField
+        //         variant="outlined"
+        //         margin="normal"
+        //         required
+        //         fullWidth
+        //         name="username"
+        //         label="Username"
+        //         type="username"
+        //         id="username"
+        //         autoComplete="current-username"
+        //         value={username}
+        //         onChange={onChangeUsername}
+        //       />
+        //       <TextField
+        //         variant="outlined"
+        //         margin="normal"
+        //         required
+        //         fullWidth
+        //         name="password"
+        //         label="Password"
+        //         type="password"
+        //         id="password"
+        //         autoComplete="current-password"
+        //         value={password}
+        //         onChange={onChangePassword}
+        //       />
+        //       <FormControlLabel
+        //         control={<Checkbox value="remember" color="primary" />}
+        //         label="Remember me"
+        //       />
+        //       <Button
+        //         type="submit"
+        //         fullWidth
+        //         variant="contained"
+        //         color="primary"
+        //         onClick={register}
                 
-              >
-                Sign Up 🎾
-              </Button>
-              <Grid container>
-                <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Already have an account? Sign in!"}
-                  </Link>
-                </Grid>
-              </Grid>
-            </form>
-          </div>
-        </Container>
+        //       >
+        //         Sign Up 🎾
+        //       </Button>
+        //       <Grid container>
+        //         <Grid item>
+        //           <Link href="#" variant="body2">
+        //             {"Already have an account? Sign in!"}
+        //           </Link>
+        //         </Grid>
+        //       </Grid>
+        //     </form>
+        //   </div>
+        // </Container>
+        <>
+        Form 2
+        </>
       );
 }
 

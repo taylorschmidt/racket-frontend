@@ -1,8 +1,7 @@
 import React, { useState }  from 'react'
 import axios from 'axios'
 import { useRouter } from "next/router";
-import { CssBaseline, Container, Avatar, Typography, TextField, FormControlLabel, Checkbox, Copyright, Box, Grid, Link, Button } from '@material-ui/core';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+
 
 
 const SignIn = () => {
@@ -53,64 +52,67 @@ const SignIn = () => {
     
 
     return (
-        <Container component="main" maxWidth="xs">
-          {/* <CssBaseline /> */}
-          <div >
-            <Typography component="h1" variant="h5">
-              Sign in to CourtSide
-            </Typography>
-            <form noValidate>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                autoFocus
-                value={email}
-                onChange={onChangeEmail}
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                value={password}
-                onChange={onChangePassword}
-              />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                onClick={login}
+        <>
+        Form
+        </>
+    //     <Container component="main" maxWidth="xs">
+    //       {/* <CssBaseline /> */}
+    //       <div >
+    //         <Typography component="h1" variant="h5">
+    //           Sign in to CourtSide
+    //         </Typography>
+    //         <form noValidate>
+    //           <TextField
+    //             variant="outlined"
+    //             margin="normal"
+    //             required
+    //             fullWidth
+    //             id="email"
+    //             label="Email Address"
+    //             name="email"
+    //             autoComplete="email"
+    //             autoFocus
+    //             value={email}
+    //             onChange={onChangeEmail}
+    //           />
+    //           <TextField
+    //             variant="outlined"
+    //             margin="normal"
+    //             required
+    //             fullWidth
+    //             name="password"
+    //             label="Password"
+    //             type="password"
+    //             id="password"
+    //             autoComplete="current-password"
+    //             value={password}
+    //             onChange={onChangePassword}
+    //           />
+    //           <FormControlLabel
+    //             control={<Checkbox value="remember" color="primary" />}
+    //             label="Remember me"
+    //           />
+    //           <Button
+    //             type="submit"
+    //             fullWidth
+    //             variant="contained"
+    //             color="primary"
+    //             onClick={login}
                 
-              >
-                Log In 🎾
-              </Button>
-              <Grid container>
-                <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Need to create an account? Sign up!"}
-                  </Link>
-                </Grid>
-              </Grid>
-            </form>
-          </div>
-        </Container>
-      );
+    //           >
+    //             Log In 🎾
+    //           </Button>
+    //           <Grid container>
+    //             <Grid item>
+    //               <Link href="#" variant="body2">
+    //                 {"Need to create an account? Sign up!"}
+    //               </Link>
+    //             </Grid>
+    //           </Grid>
+    //         </form>
+    //       </div>
+    //     </Container>
+    );
 }
 
 export default SignIn
