@@ -5,6 +5,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme } from '@material-ui/core/styles';
 import blue from '@material-ui/core/colors/blue';
+import Layout from '../components/Layout'
 
 
 export default function MyApp(props) {
@@ -32,6 +33,7 @@ const theme = createMuiTheme({
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
+        <Layout />
         <Component {...pageProps} />
       </ThemeProvider>
     </React.Fragment>
