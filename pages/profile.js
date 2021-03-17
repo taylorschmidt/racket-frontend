@@ -1,7 +1,11 @@
 import axios from 'axios'
-import {useEffect} from 'react'
+import {useEffect, useState} from 'react'
 
-export default function form() {
+export default function profile() {
+    //state
+    const [doubles, setDoubles] = useState(undefined)
+    const [singles, setSingles] = useState(undefined)
+    const [loading, setLoading] = useState(true)
 
     const getUser = () => {
         axios
@@ -17,7 +21,10 @@ export default function form() {
         axios
         .get('http://localhost:8000' + `/api/v1/doubles/`, { withCredentials: true })
         .then((data) => {
-          console.log(data.data)})
+          console.log(data.data.data)
+          let singlesData = data.data.data
+          setDoubles(data.data.data)
+        })
         .catch((err)=>{
             console.log(err)
         })
@@ -27,7 +34,10 @@ export default function form() {
         axios
         .get('http://localhost:8000' + `/api/v1/singles/`, { withCredentials: true })
         .then((data) => {
-          console.log(data.data)})
+          console.log('singles', data.data.data)
+        //   setSingles(data.data.data)
+          setLoading(false)
+        })
         .catch((err)=>{
             console.log(err)
         })
@@ -40,9 +50,19 @@ export default function form() {
       }, []);
 
 
+
     return (
         <>
-        Profile!
+        {loading && (
+            <div>Loading...</div>
+        )}
+        {!loading && (
+            <>
+            <div>My Profile!</div>
+        <div>{singles[0].notes}</div>
+            
+            </>
+        )}
         </>
     )
 }
