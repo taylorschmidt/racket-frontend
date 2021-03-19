@@ -5,12 +5,14 @@ import {
   getSinglesMatches,
   getDoublesMatches,
 } from "../services/user.services";
+import DatePicker from 'react-datepicker';
 
 export default function profile() {
   const [doubles, setDoubles] = useState(undefined);
   const [singles, setSingles] = useState(undefined);
   const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState(undefined);
+  const [startDate, setStartDate] = useState(new Date());    
 
   useEffect(() => {
     getCurrentUser().then(
@@ -49,6 +51,7 @@ export default function profile() {
       {!loading && (
         <>
           <div>My Profile!</div>
+        <DatePicker selected={startDate} onChange={date => setStartDate(date)} />
           <div>{currentUser[0].id}</div>
           <div>{singles[0].id}</div>
           <div>{doubles[0].notes}</div>
