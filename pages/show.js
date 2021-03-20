@@ -23,15 +23,13 @@ export default function show() {
   const { query } = useRouter();
   const [newEdit, setNewEdit] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [pageData, setPageData] = useState(undefined)
+  const [pageData, setPageData] = useState(undefined);
   const [startDate, setStartDate] = useState(new Date());
   const [opponent, setOpponent] = useState("");
   const [score, setScore] = useState("");
   const [win, setWin] = useState(true);
   const [notes, setNotes] = useState("");
   const [userId, setUserId] = useState(undefined);
-
-
 
   const onChangeOpponent = (e) => {
     const opponent = e.target.value;
@@ -79,7 +77,6 @@ export default function show() {
       );
   };
 
-
   const setEdit = () => {
     setNewEdit(true);
   };
@@ -96,81 +93,81 @@ export default function show() {
 
   const editDisplay = () => {
     return (
-        <>
+      <>
         <Stack spacing={4}>
-        {/* <DatePicker
+          {/* <DatePicker
           selected={pageData.date}
           onChange={(date) => setStartDate(date)}
         /> */}
-        <FormControl isRequired>
-          <InputGroup>
-            <InputLeftElement children={<>🤺</>} />
-            <Input
-              type="text"
-              placeholder="Opponent"
-              aria-label="Opponent"
-              value={pageData.opponent}
-              onChange={onChangeOpponent}
+          <FormControl isRequired>
+            <InputGroup>
+              <InputLeftElement children={<>🤺</>} />
+              <Input
+                type="text"
+                placeholder="Opponent"
+                aria-label="Opponent"
+                defaultValue={pageData.opponent}
+                onChange={onChangeOpponent}
+              />
+            </InputGroup>
+            <InputGroup>
+              <InputLeftElement children={<>🗒</>} />
+              <Input
+                type="text"
+                placeholder="Score"
+                aria-label="Score"
+                defaultValue={pageData.score}
+                onChange={onChangeScore}
+              />
+            </InputGroup>
+            <RadioGroup onChange={setWin} defaultValue={pageData.wine}>
+              <Stack direction="row">
+                <Radio value="true">Win</Radio>
+                <Radio value="false">Loss</Radio>
+              </Stack>
+            </RadioGroup>
+            <Text mb="8px">Notes: </Text>
+            <Textarea
+              defaultValue={pageData.notes}
+              onChange={onChangeNotes}
+              placeholder="Record any notes here."
+              size="sm"
             />
-          </InputGroup>
-          <InputGroup>
-            <InputLeftElement children={<>🗒</>} />
-            <Input
-              type="text"
-              placeholder="Score"
-              aria-label="Score"
-              value={pageData.score}
-              onChange={onChangeScore}
-            />
-          </InputGroup>
-          <RadioGroup onChange={setWin} value={win}>
-            <Stack direction="row">
-              <Radio value="true">Win</Radio>
-              <Radio value="false">Loss</Radio>
-            </Stack>
-          </RadioGroup>
-          <Text mb="8px">Notes: </Text>
-          <Textarea
-            value={pageData.notes}
-            onChange={onChangeNotes}
-            placeholder="Record any notes here."
-            size="sm"
-          />
-        </FormControl>
-        <Button
-          bg="1"
-          _hover={{ background: "2", boxShadow: "lg" }}
-          color="white"
-          variant="solid"
-          variantColor="red"
-          boxShadow="sm"
-          _active={{ boxShadow: "lg" }}
-          onClick={onSubmitEdit}
-        >
-          Submit Edits
-        </Button>
-      </Stack>
-    </>
-    )
+          </FormControl>
+          <Button
+            bg="1"
+            _hover={{ background: "2", boxShadow: "lg" }}
+            color="white"
+            variant="solid"
+            variantColor="red"
+            boxShadow="sm"
+            _active={{ boxShadow: "lg" }}
+            onClick={onSubmitEdit}
+          >
+            Submit Edits
+          </Button>
+        </Stack>
+      </>
+    );
   };
 
-useEffect(()=>{
+  useEffect(() => {
     axios
-    .get("http://localhost:8000" + `/api/v1/singles/${query.id}`, {
-      withCredentials: true,
-    })
-    .then((data) => {
-      console.log("singles match data", data.data.data);
-      setPageData(data.data.data)
-      setTimeout(()=>{
-        setLoading(false)
-      }, 500)
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-}, [])
-        
+      .get("http://localhost:8000" + `/api/v1/singles/${query.id}`, {
+        withCredentials: true,
+      })
+      .then((data) => {
+        console.log("singles match data", data.data.data);
+        setPageData(data.data.data);
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <>
       View/Edit Page!
