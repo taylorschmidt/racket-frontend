@@ -5,6 +5,8 @@ import {
   getSinglesMatches,
   getDoublesMatches,
 } from "../services/user.services";
+import DisplaySingles from '../components/DisplaySingles'
+import DisplayDoubles from '../components/DisplayDoubles'
 import DatePicker from 'react-datepicker';
 
 export default function profile() {
@@ -42,8 +44,6 @@ export default function profile() {
         console.log(error);
       }
     );
-    console.log('sing state', singles)
-    console.log(doubles)
   }, []);
 
   return (
@@ -52,10 +52,8 @@ export default function profile() {
       {!loading && (
         <>
           <div>My Profile!</div>
-        <DatePicker selected={startDate} onChange={date => setStartDate(date)} />
-          <div>{currentUser[0].id}</div>
-          <div>{singles[0].id}</div>
-          <div>{doubles[0].notes}</div>
+          <DisplaySingles singles={singles} />
+          <DisplayDoubles doubles={doubles} />
         </>
       )}
     </>

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {Button} from "@chakra-ui/react";
 
 export default function Layout() {
     const logout = () => {
@@ -19,7 +20,8 @@ export default function Layout() {
 
     return (
         <>
-        <button onClick={logout}>Log Out!</button>
+        Here is the nav bar.
+        <Button onClick={logout}>Log Out!</Button>
         </>
     )
 }
