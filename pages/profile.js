@@ -25,7 +25,7 @@ export default function profile() {
     );
     getSinglesMatches().then(
       (data) => {
-        console.log('backend', data.data.data)
+        console.log('backend singles', data.data.data)
         setSingles(data.data.data);
       },
       (error) => {
@@ -34,6 +34,7 @@ export default function profile() {
     );
     getDoublesMatches().then(
       (data) => {
+        console.log('backend doubles', data.data.data)
         setDoubles(data.data.data);
         setLoading(false);
       },
