@@ -16,6 +16,7 @@ export default function profile() {
   const [currentUser, setCurrentUser] = useState(undefined);
   const [startDate, setStartDate] = useState(new Date());    
 
+
   useEffect(() => {
     getCurrentUser().then(
       (data) => {

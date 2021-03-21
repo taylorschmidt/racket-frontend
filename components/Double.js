@@ -121,8 +121,8 @@ export default function Single() {
           </RadioGroup>
           <RadioGroup onChange={setChange} value={change}>
             <Stack direction="row">
-              <Radio value="true">Changed Hands</Radio>
-              <Radio value="false">Did Not Change Hands</Radio>
+              <Radio value={true}>Changed Hands</Radio>
+              <Radio value={false}>Did Not Change Hands</Radio>
             </Stack>
           </RadioGroup>
           <InputGroup>
@@ -137,8 +137,8 @@ export default function Single() {
           </InputGroup>
           <RadioGroup onChange={setWin} value={win}>
             <Stack direction="row">
-              <Radio value="true">Win</Radio>
-              <Radio value="false">Loss</Radio>
+              <Radio value={true}>Win</Radio>
+              <Radio value={false}>Loss</Radio>
             </Stack>
           </RadioGroup>
           <Text mb="8px">Notes: </Text>

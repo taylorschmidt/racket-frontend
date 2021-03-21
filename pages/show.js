@@ -63,6 +63,7 @@ export default function show() {
               score: score,
               notes: notes,
               win: win,
+              date: startDate
             },
             {
               withCredentials: true,
@@ -77,6 +78,11 @@ export default function show() {
       );
   };
 
+  const deleteMatch = () => {
+    axios.delete("http://localhost:8000" + `/api/v1/singles/${query.id}`, {
+        withCredentials: true,
+      }).then(data=>{console.log('deleted match', data)}).then(()=>{window.location.replace("/profile")})
+}
   const setEdit = () => {
     setNewEdit(true);
   };
@@ -86,7 +92,13 @@ export default function show() {
       <>
         <div>Here is the current match data:</div>
         <div>{pageData.id}</div>
+        <div>{pageData.date}</div>
+        <div>{pageData.opponent}</div>
+        <div>{pageData.win}</div>
+        <div>{pageData.score}</div>
+        <div>{pageData.notes}</div>
         <Button onClick={setEdit}>Edit This!</Button>
+        <Button onClick={deleteMatch}>Delete This!</Button>
       </>
     );
   };
@@ -95,10 +107,9 @@ export default function show() {
     return (
       <>
         <Stack spacing={4}>
-          {/* <DatePicker
-          selected={pageData.date}
+          <DatePicker
           onChange={(date) => setStartDate(date)}
-        /> */}
+        />
           <FormControl isRequired>
             <InputGroup>
               <InputLeftElement children={<>🤺</>} />
@@ -122,8 +133,8 @@ export default function show() {
             </InputGroup>
             <RadioGroup onChange={setWin} defaultValue={pageData.wine}>
               <Stack direction="row">
-                <Radio value="true">Win</Radio>
-                <Radio value="false">Loss</Radio>
+                <Radio value={true}>Win</Radio>
+                <Radio value={false}>Loss</Radio>
               </Stack>
             </RadioGroup>
             <Text mb="8px">Notes: </Text>

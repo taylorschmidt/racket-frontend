@@ -106,8 +106,8 @@ export default function Single() {
           </InputGroup>
           <RadioGroup onChange={setWin} value={win}>
             <Stack direction="row">
-              <Radio value="true">Win</Radio>
-              <Radio value="false">Loss</Radio>
+              <Radio value={true}>Win</Radio>
+              <Radio value={false}>Loss</Radio>
             </Stack>
           </RadioGroup>
           <Text mb="8px">Notes: </Text>
