@@ -41,7 +41,7 @@ const SignUp = () => {
     const register = (e) => {
         e.preventDefault()
         axios.post(
-            'http://localhost:8000' + `/api/v1/user/register`,
+            process.env.NEXT_PUBLIC_BACKEND_URL + `/api/v1/user/register`,
             {username: username,
             email: email,
             password: password

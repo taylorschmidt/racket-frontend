@@ -3,7 +3,7 @@ import axios from 'axios'
 //get user data
 
 export const getCurrentUser = () =>{
-    return axios.get('http://localhost:8000' + `/api/v1/user/`, { withCredentials: true })
+    return axios.get(process.env.NEXT_PUBLIC_BACKEND_URL + `/api/v1/user/`, { withCredentials: true })
 }
 
 export const getSinglesMatches = () => {

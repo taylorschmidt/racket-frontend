@@ -23,7 +23,7 @@ export default function Layout() {
 
     const logout = () => {
         axios
-          .get('http://localhost:8000' + `/api/v1/user/logout`, {
+          .get(process.env.NEXT_PUBLIC_BACKEND_URL + `/api/v1/user/logout`, {
             withCredentials: true,
           })
           .then((data) => {
