@@ -74,6 +74,7 @@ export default function Single() {
           )
           .then((data) => {
             console.log("doubles posted", data.data.data);
+            window.location.replace("/profile")
           })
           .catch((err) => {
             console.log(err);
