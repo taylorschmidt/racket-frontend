@@ -8,14 +8,14 @@ export const getCurrentUser = () =>{
 
 export const getSinglesMatches = () => {
     return axios
-      .get("http://localhost:8000" + `/api/v1/singles/`, {
+      .get(process.env.NEXT_PUBLIC_BACKEND_URL + `/api/v1/singles/`, {
         withCredentials: true,
       })
 }
 
 export const getDoublesMatches = () => {
     return axios
-      .get("http://localhost:8000" + `/api/v1/doubles/`, {
+      .get(process.env.NEXT_PUBLIC_BACKEND_URL + `/api/v1/doubles/`, {
         withCredentials: true,
       })
 }

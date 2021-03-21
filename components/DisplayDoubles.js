@@ -8,7 +8,7 @@ export default function DisplayDoubles({doubles}) {
         const router = useRouter();
         return doubles.map((match, index) => {
             const deleteMatch = () => {
-                axios.delete("http://localhost:8000" + `/api/v1/doubles/${match.id}`, {
+                axios.delete(process.env.NEXT_PUBLIC_BACKEND_URL + `/api/v1/doubles/${match.id}`, {
                     withCredentials: true,
                   }).then(data=>{console.log('deleted match', data)}).then(()=>{window.location.reload()})
             }

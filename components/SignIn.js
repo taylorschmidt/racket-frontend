@@ -35,7 +35,7 @@ const SignIn = () => {
     e.preventDefault();
     axios
       .post(
-        "http://localhost:8000" + `/api/v1/user/login`,
+        process.env.NEXT_PUBLIC_BACKEND_URL + `/api/v1/user/login`,
         {
           email: email,
           password: password,

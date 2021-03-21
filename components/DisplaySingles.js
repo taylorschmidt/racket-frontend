@@ -8,7 +8,7 @@ export default function DisplaySingles({ singles }) {
     return singles.map((match, index) => {
       const deleteMatch = () => {
         axios
-          .delete("http://localhost:8000" + `/api/v1/singles/${match.id}`, {
+          .delete(process.env.NEXT_PUBLIC_BACKEND_URL + `/api/v1/singles/${match.id}`, {
             withCredentials: true,
           })
           .then((data) => {

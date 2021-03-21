@@ -82,7 +82,7 @@ export default function show() {
       .then(
         axios
           .put(
-            "http://localhost:8000" + `/api/v1/doubles/${query.id}`,
+            process.env.NEXT_PUBLIC_BACKEND_URL + `/api/v1/doubles/${query.id}`,
             {
               person_id: userId,
               opponent: opponent,
@@ -112,7 +112,7 @@ export default function show() {
   };
 
   const deleteMatch = () => {
-    axios.delete("http://localhost:8000" + `/api/v1/doubles/${query.id}`, {
+    axios.delete(process.env.NEXT_PUBLIC_BACKEND_URL + `/api/v1/doubles/${query.id}`, {
         withCredentials: true,
       }).then(data=>{console.log('deleted match', data)}).then(()=>{window.location.replace("/profile")})
 }
@@ -250,7 +250,7 @@ export default function show() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000" + `/api/v1/doubles/${query.id}`, {
+      .get(process.env.NEXT_PUBLIC_BACKEND_URL + `/api/v1/doubles/${query.id}`, {
         withCredentials: true,
       })
       .then((data) => {

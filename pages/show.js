@@ -68,7 +68,7 @@ const { colorMode } = useColorMode()
       .then(
         axios
           .put(
-            "http://localhost:8000" + `/api/v1/singles/${query.id}`,
+            process.env.NEXT_PUBLIC_BACKEND_URL + `/api/v1/singles/${query.id}`,
             {
               person_id: userId,
               opponent: opponent,
@@ -92,7 +92,7 @@ const { colorMode } = useColorMode()
   };
 
   const deleteMatch = () => {
-    axios.delete("http://localhost:8000" + `/api/v1/singles/${query.id}`, {
+    axios.delete(process.env.NEXT_PUBLIC_BACKEND_URL + `/api/v1/singles/${query.id}`, {
         withCredentials: true,
       }).then(data=>{console.log('deleted match', data)}).then(()=>{window.location.replace("/profile")})
 }
@@ -210,7 +210,7 @@ const { colorMode } = useColorMode()
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000" + `/api/v1/singles/${query.id}`, {
+      .get(process.env.NEXT_PUBLIC_BACKEND_URL + `/api/v1/singles/${query.id}`, {
         withCredentials: true,
       })
       .then((data) => {

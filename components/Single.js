@@ -46,7 +46,7 @@ export default function Single() {
       .then(
         axios
           .post(
-            "http://localhost:8000" + `/api/v1/singles/`,
+            process.env.NEXT_PUBLIC_BACKEND_URL + `/api/v1/singles/`,
             {
               person_id: userId,
               opponent: opponent,
