@@ -14,12 +14,18 @@ import {
   RadioGroup,
   Textarea,
   Text,
+  Flex,
+  Spacer,
+  Box,
+  useColorMode,
+  Center
 } from "@chakra-ui/react";
 import { InfoIcon, EmailIcon, LockIcon } from "@chakra-ui/icons";
 import DatePicker from "react-datepicker";
 import { getCurrentUser } from "../services/user.services";
 
 export default function show() {
+  const { colorMode } = useColorMode()
   const { query } = useRouter();
   const [newEdit, setNewEdit] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -55,6 +61,18 @@ export default function show() {
 }
 
   const onSubmitEdit = () => {
+    let myWin
+    if (win === "true") {
+        myWin = true
+    } else if (win === "false") {
+        myWin = false
+    }
+    let myChange
+    if (change === "true") {
+        myChange = true
+    } else if (change === "false") {
+        myChange = false
+    }
     getCurrentUser()
       .then((data) => {
         console.log(data.data.data);
@@ -66,14 +84,14 @@ export default function show() {
           .put(
             "http://localhost:8000" + `/api/v1/doubles/${query.id}`,
             {
-                person_id: userId,
+              person_id: userId,
               opponent: opponent,
               partner: partner,
               hand: hand,
               score: score,
-              change: change,
+              change: myChange,
               notes: notes,
-              win: win
+              win: myWin
             },
             {
               withCredentials: true,
@@ -81,6 +99,7 @@ export default function show() {
           )
           .then((data) => {
             console.log("doubles updated", data.data.data);
+            window.location.replace("/profile")
           })
           .catch((err) => {
             console.log(err);
@@ -100,33 +119,64 @@ export default function show() {
 
   const display = () => {
     return (
-      <>
-        <div>Here is the current match data:</div>
-        <div>{pageData.id}</div>
-        <div>{pageData.date}</div>
-        <div>{pageData.opponent}</div>
-        <div>{pageData.partner}</div>
-        <div>{pageData.win}</div>
-        <div>{pageData.hand}</div>
-        <div>{pageData.change}</div>
-        <div>{pageData.score}</div>
-        <div>{pageData.notes}</div>
-        <Button onClick={setEdit}>Edit This!</Button>
-        <Button onClick={deleteMatch}>Delete This!</Button>
-      </>
+        <Flex borderWidth="2px" borderRadius="lg" overflow="hidden" p="2" w="100%" m={2}>
+            <Box>
+             <div>{pageData.date}</div>
+              {pageData.opponent && <div>Opponent: {pageData.opponent}</div>}
+              <div>Partner: {pageData.parner}</div>
+              <div>Score: {pageData.score}</div>
+              {pageData.win && <div>Win</div>}
+              {!pageData.win && <div>Loss</div>}
+              <div>I Played: {pageData.hand}</div>
+              {pageData.change && <div>My partner and I changed hands.</div>}
+              {!pageData.change && <div>My partner and I did not change hands.</div>}
+              {pageData.notes && <div>Notes: {pageData.notes}</div>}
+            </Box>
+            <Spacer />
+            <Box>
+            <Button 
+                 bg="1"
+                 _hover={{ background: "2", boxShadow: "lg" }}
+                 color="white"
+                 type="submit"
+                 variant="solid"
+                 variantColor="red"
+                 boxShadow="sm"
+                 _active={{ boxShadow: "lg" }}
+                 onClick={setEdit}
+              >
+                Edit Match
+              </Button>
+              <Button 
+                 bg="1"
+                 _hover={{ background: "2", boxShadow: "lg" }}
+                 color="white"
+                 type="submit"
+                 variant="solid"
+                 variantColor="red"
+                 boxShadow="sm"
+                 _active={{ boxShadow: "lg" }}
+               onClick={deleteMatch}>Delete Match</Button>
+            </Box>
+        </Flex>
     );
   };
 
   const editDisplay = () => {
     return (
       <>
+      <div><Center m={2}>Edit Match</Center></div>
         <Stack spacing={4}>
-          <DatePicker
+        <Flex>
+        <Text>Match Date: </Text> <Spacer />
+        <DatePicker
+          selected={startDate}
           onChange={(date) => setStartDate(date)}
         />
+        </Flex>
           <FormControl isRequired>
             <InputGroup>
-              <InputLeftElement children={<>🤺</>} />
+              <InputLeftElement children={<>🎾</>} />
               <Input
                 type="text"
                 placeholder="Opponent"
@@ -136,7 +186,7 @@ export default function show() {
               />
             </InputGroup>
             <InputGroup>
-            <InputLeftElement children={<>🤺</>} />
+            <InputLeftElement children={<>🤝</>} />
             <Input
               type="text"
               placeholder="Partner"
@@ -145,16 +195,16 @@ export default function show() {
               onChange={onChangePartner}
             />
           </InputGroup>
-          <RadioGroup onChange={setHand} defaultValue={pageData.hand}>
+          <RadioGroup borderWidth="2px" borderRadius="lg" overflow="hidden" p="2" w="100%" m={2} onChange={setHand} defaultValue={pageData.hand}>
             <Stack direction="row">
               <Radio value="forehand">Forehand</Radio>
               <Radio value="backhand">Backhand</Radio>
             </Stack>
           </RadioGroup>
-          <RadioGroup onChange={setChange} defaultValue={pageData.change}>
+          <RadioGroup borderWidth="2px" borderRadius="lg" overflow="hidden" p="2" w="100%" m={2} onChange={setChange} defaultValue={pageData.change}>
             <Stack direction="row">
-              <Radio value={true}>Changed Hands</Radio>
-              <Radio value={false}>Did Not Change Hands</Radio>
+              <Radio value="true">Changed Hands</Radio>
+              <Radio value="false">Did Not Change Hands</Radio>
             </Stack>
           </RadioGroup>
             <InputGroup>
@@ -167,10 +217,10 @@ export default function show() {
                 onChange={onChangeScore}
               />
             </InputGroup>
-            <RadioGroup onChange={setWin} defaultValue={pageData.win}>
+            <RadioGroup borderWidth="2px" borderRadius="lg" overflow="hidden" p="2" w="100%" m={2} onChange={setWin} defaultValue={pageData.win}>
               <Stack direction="row">
-                <Radio value={true}>Win</Radio>
-                <Radio value={false}>Loss</Radio>
+                <Radio value="true">Win</Radio>
+                <Radio value="false">Loss</Radio>
               </Stack>
             </RadioGroup>
             <Text mb="8px">Notes: </Text>
@@ -217,10 +267,17 @@ export default function show() {
 
   return (
     <>
-      View/Edit Page!
-      {loading && !newEdit && <>Loading...</>}
+           {loading && !newEdit && <>Loading...</>}
       {!loading && !newEdit && <>{display()}</>}
-      {newEdit && <>{editDisplay()}</>}
+      {newEdit && <>
+        <Box w="100%" mt={5}>
+            <Center>
+            <Box w="400px" bg={colorMode === "light" ? "gray.200" : "gray.600" } p={3} boxShadow="sm" rounded="lg">
+      {editDisplay()}
+      </Box>
+      </Center>
+      </Box>
+      </>}
     </>
   );
 }

@@ -54,7 +54,7 @@ const SignUp = () => {
                 console.log(data.data)
                 setTimeout(() => {
                     window.location.replace("/profile")
-                  }, 5000);
+                  }, 1000);
             }
         }).catch((err)=>{
             console.log("error registering user", err)
@@ -105,7 +105,7 @@ const SignUp = () => {
                     // type="submit"
                     bg="1"
                     _hover={{ background: "2", boxShadow: "lg" }}
-              color="white"
+                    color="white"
                     variant="solid"
                     variantColor="red"
                     boxShadow="sm"

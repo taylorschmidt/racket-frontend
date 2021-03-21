@@ -14,12 +14,18 @@ import {
   RadioGroup,
   Textarea,
   Text,
+  Flex,
+  Spacer,
+  Box,
+  Center,
+  useColorMode
 } from "@chakra-ui/react";
 import { InfoIcon, EmailIcon, LockIcon } from "@chakra-ui/icons";
 import DatePicker from "react-datepicker";
 import { getCurrentUser } from "../services/user.services";
 
 export default function show() {
+const { colorMode } = useColorMode()
   const { query } = useRouter();
   const [newEdit, setNewEdit] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -27,7 +33,7 @@ export default function show() {
   const [startDate, setStartDate] = useState(new Date());
   const [opponent, setOpponent] = useState("");
   const [score, setScore] = useState("");
-  const [win, setWin] = useState(true);
+  const [win, setWin] = useState(undefined);
   const [notes, setNotes] = useState("");
   const [userId, setUserId] = useState(undefined);
 
@@ -47,6 +53,12 @@ export default function show() {
   };
 
   const onSubmitEdit = () => {
+    let myWin
+    if (win === "true") {
+        myWin = true
+    } else if (win === "false") {
+        myWin = false
+    }
     getCurrentUser()
       .then((data) => {
         console.log(data.data.data);
@@ -62,7 +74,7 @@ export default function show() {
               opponent: opponent,
               score: score,
               notes: notes,
-              win: win,
+              win: myWin,
               date: startDate
             },
             {
@@ -71,6 +83,7 @@ export default function show() {
           )
           .then((data) => {
             console.log("singles updated", data.data.data);
+            window.location.replace("/profile")
           })
           .catch((err) => {
             console.log(err);
@@ -90,15 +103,44 @@ export default function show() {
   const display = () => {
     return (
       <>
-        <div>Here is the current match data:</div>
-        <div>{pageData.id}</div>
-        <div>{pageData.date}</div>
-        <div>{pageData.opponent}</div>
-        <div>{pageData.win}</div>
-        <div>{pageData.score}</div>
-        <div>{pageData.notes}</div>
-        <Button onClick={setEdit}>Edit This!</Button>
-        <Button onClick={deleteMatch}>Delete This!</Button>
+        <Flex borderWidth="2px" borderRadius="lg" overflow="hidden" p="2" w="100%" m={2}>
+            <Box>
+             <div>{pageData.date}</div>
+              {pageData.opponent && <div>Opponent: {pageData.opponent}</div>}
+              <div>Partner: {pageData.parner}</div>
+              <div>Score: {pageData.score}</div>
+              {pageData.win && <div>Win</div>}
+              {!pageData.win && <div>Loss</div>}
+              {pageData.notes && <div>Notes: {pageData.notes}</div>}
+
+            </Box>
+            <Spacer />
+            <Box>
+            <Button 
+                 bg="1"
+                 _hover={{ background: "2", boxShadow: "lg" }}
+                 color="white"
+                 type="submit"
+                 variant="solid"
+                 variantColor="red"
+                 boxShadow="sm"
+                 _active={{ boxShadow: "lg" }}
+                 onClick={setEdit}
+              >
+                Edit Match
+              </Button>
+              <Button 
+                 bg="1"
+                 _hover={{ background: "2", boxShadow: "lg" }}
+                 color="white"
+                 type="submit"
+                 variant="solid"
+                 variantColor="red"
+                 boxShadow="sm"
+                 _active={{ boxShadow: "lg" }}
+               onClick={deleteMatch}>Delete Match</Button>
+            </Box>
+        </Flex>
       </>
     );
   };
@@ -106,13 +148,18 @@ export default function show() {
   const editDisplay = () => {
     return (
       <>
+        <div><Center m={2}>Edit Match</Center></div>
         <Stack spacing={4}>
-          <DatePicker
+        <Flex>
+        <Text>Match Date: </Text> <Spacer />
+        <DatePicker
+          selected={startDate}
           onChange={(date) => setStartDate(date)}
         />
+        </Flex>
           <FormControl isRequired>
             <InputGroup>
-              <InputLeftElement children={<>🤺</>} />
+              <InputLeftElement children={<>🎾</>} />
               <Input
                 type="text"
                 placeholder="Opponent"
@@ -131,17 +178,16 @@ export default function show() {
                 onChange={onChangeScore}
               />
             </InputGroup>
-            <RadioGroup onChange={setWin} defaultValue={pageData.wine}>
+            <RadioGroup borderWidth="2px" borderRadius="lg" overflow="hidden" p="2" w="100%" m={2} onChange={setWin} defaultValue={pageData.wine}>
               <Stack direction="row">
-                <Radio value={true}>Win</Radio>
-                <Radio value={false}>Loss</Radio>
+                <Radio value='true'>Win</Radio>
+                <Radio value='false'>Loss</Radio>
               </Stack>
             </RadioGroup>
-            <Text mb="8px">Notes: </Text>
             <Textarea
               defaultValue={pageData.notes}
               onChange={onChangeNotes}
-              placeholder="Record any notes here."
+              placeholder="Notes"
               size="sm"
             />
           </FormControl>
@@ -181,10 +227,17 @@ export default function show() {
 
   return (
     <>
-      View/Edit Page!
       {loading && !newEdit && <>Loading...</>}
       {!loading && !newEdit && <>{display()}</>}
-      {newEdit && <>{editDisplay()}</>}
+      {newEdit && <>
+        <Box w="100%" mt={5}>
+            <Center>
+            <Box w="400px" bg={colorMode === "light" ? "gray.200" : "gray.600" } p={3} boxShadow="sm" rounded="lg">
+      {editDisplay()}
+      </Box>
+      </Center>
+      </Box>
+      </>}
     </>
   );
 }

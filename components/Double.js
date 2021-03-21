@@ -14,10 +14,13 @@ import {
   RadioGroup,
   Textarea,
   Text,
+  Flex,
+  Spacer
 } from "@chakra-ui/react";
 import { InfoIcon, EmailIcon, LockIcon } from "@chakra-ui/icons";
 import DatePicker from "react-datepicker";
 import { getCurrentUser } from "../services/user.services";
+import Calendar from 'react-calendar';
 
 export default function Single() {
   const [startDate, setStartDate] = useState(new Date());
@@ -31,6 +34,20 @@ export default function Single() {
   const [change, setChange] = useState(true)
 
   const onSubmitMatch = () => {
+         //fixing radio boolean issue
+         let myWin
+         if (win === "true") {
+             myWin = true
+         } else if (win === "false") {
+             myWin = false
+         }
+            //fixing radio boolean issue
+      let myChange
+      if (change === "true") {
+          myChange = true
+      } else if (change === "false") {
+          myChange = false
+      }
     getCurrentUser()
       .then((data) => {
         console.log(data.data.data);
@@ -47,9 +64,9 @@ export default function Single() {
               partner: partner,
               hand: hand,
               score: score,
-              change: change,
+              change: myChange,
               notes: notes,
-              win: win,
+              win: myWin,
             },
             {
               withCredentials: true,
@@ -88,13 +105,16 @@ export default function Single() {
   return (
     <>
       <Stack spacing={4}>
+        <Flex>
+        <Text>Match Date: </Text> <Spacer />
         <DatePicker
           selected={startDate}
           onChange={(date) => setStartDate(date)}
         />
+        </Flex>
         <FormControl isRequired>
           <InputGroup>
-            <InputLeftElement children={<>🤺</>} />
+            <InputLeftElement overflow="hidden" children={<>🎾</>} />
             <Input
               type="text"
               placeholder="Opponent"
@@ -104,7 +124,7 @@ export default function Single() {
             />
           </InputGroup>
           <InputGroup>
-            <InputLeftElement children={<>🤺</>} />
+            <InputLeftElement children={<>🤝</>} />
             <Input
               type="text"
               placeholder="Partner"
@@ -113,18 +133,6 @@ export default function Single() {
               onChange={onChangePartner}
             />
           </InputGroup>
-          <RadioGroup onChange={setHand} value={hand}>
-            <Stack direction="row">
-              <Radio value="forehand">Forehand</Radio>
-              <Radio value="backhand">Backhand</Radio>
-            </Stack>
-          </RadioGroup>
-          <RadioGroup onChange={setChange} value={change}>
-            <Stack direction="row">
-              <Radio value={true}>Changed Hands</Radio>
-              <Radio value={false}>Did Not Change Hands</Radio>
-            </Stack>
-          </RadioGroup>
           <InputGroup>
             <InputLeftElement children={<>🗒</>} />
             <Input
@@ -135,17 +143,29 @@ export default function Single() {
               onChange={onChangeScore}
             />
           </InputGroup>
-          <RadioGroup onChange={setWin} value={win}>
+          <RadioGroup borderWidth="2px" borderRadius="lg" overflow="hidden" p="2" w="100%" m={2} onChange={setHand} value={hand}>
             <Stack direction="row">
-              <Radio value={true}>Win</Radio>
-              <Radio value={false}>Loss</Radio>
+              <Radio value="forehand">Forehand</Radio>
+              <Radio value="backhand">Backhand</Radio>
             </Stack>
           </RadioGroup>
-          <Text mb="8px">Notes: </Text>
+          <RadioGroup borderWidth="2px" borderRadius="lg" overflow="hidden" p="2" w="100%" m={2} onChange={setChange} value={change}>
+            <Stack direction="row">
+              <Radio value="true">Changed Hands</Radio>
+              <Radio value="false">Did Not Change Hands</Radio>
+            </Stack>
+          </RadioGroup>
+        
+          <RadioGroup borderWidth="2px" borderRadius="lg" overflow="hidden" p="2" w="100%" m={2} onChange={setWin} value={win}>
+            <Stack direction="row">
+              <Radio value="true">Win</Radio>
+              <Radio value="false">Loss</Radio>
+            </Stack>
+          </RadioGroup>
           <Textarea
             value={notes}
             onChange={onChangeNotes}
-            placeholder="Record any notes here."
+            placeholder="Notes"
             size="sm"
           />
         </FormControl>

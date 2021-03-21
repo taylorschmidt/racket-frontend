@@ -12,11 +12,11 @@ return(
             <Image src= "/Lock.png" w="80px" mx="auto" my={6}/>
             <Tabs variant="enclosed-colored" isFitted m={4}>
                 <TabList mt={3}>
-                    <Tab>Sign Up</Tab>
+                    <Tab >Sign Up</Tab>
                     <Tab>Log In</Tab>
                 </TabList>
-                <TabPanels>
-                    <TabPanel>
+                <TabPanels >
+                    <TabPanel >
                         <SignUp />
                     </TabPanel>
                     <TabPanel>

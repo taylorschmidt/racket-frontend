@@ -13,11 +13,15 @@
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.1.5",
     "axios": "^0.21.1",
+    "chart.js": "^2.9.4",
     "framer-motion": "^3.10.5",
     "materialize-css": "^1.0.0-rc.2",
     "next": "10.0.8",
     "react": "17.0.1",
+    "react-calendar": "^3.3.1",
+    "react-chartjs-2": "^2.11.1",
     "react-datepicker": "^3.6.0",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "react-minimal-pie-chart": "^8.2.0"
   }
 }

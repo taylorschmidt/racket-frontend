@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import {Button} from '@chakra-ui/react'
+import {Button, Flex, Spacer, Box} from '@chakra-ui/react'
 import axios from 'axios'
 
 export default function DisplayDoubles({doubles}) {
@@ -14,24 +14,55 @@ export default function DisplayDoubles({doubles}) {
             }
         return (
             <>
-            <li>{match.id}</li>
-            <Button
-            onClick={() => {
-                router.push({
-                  pathname: `/showDouble`,
-                  query: { id: match.id },
-                });
-              }}
-            >View/Edit Match</Button>
-            <Button onClick={deleteMatch}>Delete Match</Button>
-            </>
+            <Flex flexWrap="wrap" borderWidth="2px" borderRadius="lg" overflow="hidden" p="2" w="100%" m={2}>
+            <Box>
+             <div>{match.date}</div>
+              {match.opponent && <div>Opponent: {match.opponent}</div>}
+              <div>Partner: {match.parner}</div>
+              <div>Score: {match.score}</div>
+              {match.win && <div>Win</div>}
+              {!match.win && <div>Loss</div>}
+            </Box>
+            <Spacer />
+            <Box>
+            <Button 
+                 bg="1"
+                 _hover={{ background: "2", boxShadow: "lg" }}
+                 color="white"
+                 type="submit"
+                 variant="solid"
+                 variantColor="red"
+                 boxShadow="sm"
+                 _active={{ boxShadow: "lg" }}
+                 onClick={() => {
+                    router.push({
+                      pathname: `/showDouble`,
+                      query: { id: match.id },
+                    });
+                  }}
+              >
+                View/Edit Match
+              </Button>
+              <Button 
+                 bg="1"
+                 _hover={{ background: "2", boxShadow: "lg" }}
+                 color="white"
+                 type="submit"
+                 variant="solid"
+                 variantColor="red"
+                 boxShadow="sm"
+                 _active={{ boxShadow: "lg" }}
+               onClick={deleteMatch}>Delete Match</Button>
+            </Box>
+        </Flex>
+        </>
         )
         })
     }
 
     return(
         <>
-        Double's Matches:
+        My Double's Matches:
         <div>{displayDoubles()}</div>
         </>
     )

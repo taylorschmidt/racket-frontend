@@ -48,7 +48,7 @@ const SignIn = () => {
         } else if (data.data.status.code === 200) {
           setTimeout(() => {
             window.location.replace("/profile");
-          }, 2000);
+          }, 1000);
         }
       })
       .catch((err) => {

@@ -14,6 +14,8 @@ import {
   RadioGroup,
   Textarea,
   Text,
+  Flex,
+  Spacer
 } from "@chakra-ui/react";
 import { InfoIcon, EmailIcon, LockIcon } from "@chakra-ui/icons";
 import DatePicker from "react-datepicker";
@@ -23,11 +25,18 @@ export default function Single() {
   const [startDate, setStartDate] = useState(new Date());
   const [opponent, setOpponent] = useState("");
   const [score, setScore] = useState("");
-  const [win, setWin] = useState(true);
+  const [win, setWin] = useState(undefined);
   const [notes, setNotes] = useState("");
   const [userId, setUserId] = useState(undefined);
 
   const onSubmitMatch = () => {
+      //fixing radio boolean issue
+      let myWin
+    if (win === "true") {
+        myWin = true
+    } else if (win === "false") {
+        myWin = false
+    }
     getCurrentUser()
       .then((data) => {
         console.log(data.data.data);
@@ -43,7 +52,7 @@ export default function Single() {
               opponent: opponent,
               score: score,
               notes: notes,
-              win: win,
+              win: myWin,
             },
             {
               withCredentials: true,
@@ -51,6 +60,7 @@ export default function Single() {
           )
           .then((data) => {
             console.log("singles posted", data.data.data);
+            window.location.replace("/profile")
           })
           .catch((err) => {
             console.log(err);
@@ -73,19 +83,23 @@ export default function Single() {
     setNotes(notes);
   };
 
+
   console.log(win);
 
   return (
     <>
       <Stack spacing={4}>
+      <Flex>
+        <Text>Match Date: </Text> <Spacer />
         <DatePicker
           selected={startDate}
           onChange={(date) => setStartDate(date)}
         />
+        </Flex>
         <FormControl isRequired>
           <InputGroup>
             ☕
-            <InputLeftElement children={<>🤺</>} />
+            <InputLeftElement children={<>🎾</>} />
             <Input
               type="text"
               placeholder="Opponent"
@@ -95,7 +109,7 @@ export default function Single() {
             />
           </InputGroup>
           <InputGroup>
-            <InputLeftElement children={<>🗒</>} />
+            <InputLeftElement children={<>🗒</>} /> 
             <Input
               type="text"
               placeholder="Score"
@@ -104,17 +118,19 @@ export default function Single() {
               onChange={onChangeScore}
             />
           </InputGroup>
-          <RadioGroup onChange={setWin} value={win}>
+         
+          <RadioGroup borderWidth="2px" borderRadius="lg" overflow="hidden" p="2" w="100%" m={2} onChange={setWin} value={win}>
             <Stack direction="row">
-              <Radio value={true}>Win</Radio>
-              <Radio value={false}>Loss</Radio>
+              <Radio value='true'>Win</Radio>
+              <Radio value='false'>Loss</Radio>
             </Stack>
           </RadioGroup>
-          <Text mb="8px">Notes: </Text>
-          <Textarea
+          
+          
+          <Textarea 
             value={notes}
             onChange={onChangeNotes}
-            placeholder="Record any notes here."
+            placeholder="Notes"
             size="sm"
           />
         </FormControl>
