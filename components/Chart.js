@@ -58,7 +58,7 @@ const SinglesChart = ({win, loss, backhandCount, forehandCount, doublesWins, dou
             'Backhand'
         ],
         datasets: [{
-            data:[backhandCount, forehandCount],
+            data:[forehandCount, backhandCount],
             backgroundColor: [
                 '#008566',
                 '#C6ED2C'

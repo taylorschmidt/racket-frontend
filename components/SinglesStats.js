@@ -51,23 +51,30 @@ const SinglesStats = ({data, doubles}) => {
         return doubles.map((data, index) => {
         if(data.hand === "forehand") {
             forehandCount += 1
-            console.log('HERE', forehandCount, "back", backhandCount)
+           
         } else if (data.hand === "backhand") {
             backhandCount += 1
-            console.log('HERE', forehandCount, "back", backhandCount)
+            
         }
         })
-        console.log('HERE', forehandCount, "back", backhandCount)
+        
     }
+
+    useEffect(()=>{
+        setTimeout(()=>{
+            setLoading(false)
+        }, 1000)
+    })
 
     return(
         <>
             {countingWins()}
             {countingDoublesWins()}
             {countingHands()}
-            <Box>
-           <SinglesChart win={winCount} loss={lossCount} doublesWins={doublesWins} doublesLosses={doublesLosses} forehandCount={forehandCount} backhandCount={backhandCount}/>
-           </Box>
+           {!loading && (<Box>
+
+<SinglesChart win={winCount} loss={lossCount} doublesWins={doublesWins} doublesLosses={doublesLosses} forehandCount={forehandCount} backhandCount={backhandCount}/>
+</Box>)}
         </>
     )
 }
