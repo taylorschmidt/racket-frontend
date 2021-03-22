@@ -55,6 +55,7 @@ const SinglesStats = ({data, doubles}) => {
             backhandCount += 1
         }
         })
+        console.log('HERE', forehandCount, "back", backhandCount)
     }
 
     return(
