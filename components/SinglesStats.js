@@ -44,19 +44,24 @@ const SinglesStats = ({data, doubles}) => {
             } else if (!data.win) {
                 doublesLosses += 1
             }
-            if(data.hand === "forehand") {
-                forehandCount += 1
-            } else if (data.hand === "backhand") {
-                backhandCount += 1
-            }
     })
     }
 
+    const countingHands = () => {
+        return doubles.map((data, index) => {
+        if(data.hand === "forehand") {
+            forehandCount += 1
+        } else if (data.hand === "backhand") {
+            backhandCount += 1
+        }
+        })
+    }
 
     return(
         <>
             {countingWins()}
             {countingDoublesWins()}
+            {countingHands()}
             <Box>
            <SinglesChart win={winCount} loss={lossCount} doublesWins={doublesWins} doublesLosses={doublesLosses} forehandCount={forehandCount} backhandCount={backhandCount}/>
            </Box>
