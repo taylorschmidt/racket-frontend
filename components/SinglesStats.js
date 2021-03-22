@@ -51,8 +51,10 @@ const SinglesStats = ({data, doubles}) => {
         return doubles.map((data, index) => {
         if(data.hand === "forehand") {
             forehandCount += 1
+            console.log('HERE', forehandCount, "back", backhandCount)
         } else if (data.hand === "backhand") {
             backhandCount += 1
+            console.log('HERE', forehandCount, "back", backhandCount)
         }
         })
         console.log('HERE', forehandCount, "back", backhandCount)
