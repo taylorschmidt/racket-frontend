@@ -23,7 +23,7 @@ import { getCurrentUser } from "../services/user.services";
 import Calendar from 'react-calendar';
 
 export default function Single() {
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState("");
   const [opponent, setOpponent] = useState("");
   const [score, setScore] = useState("");
   const [win, setWin] = useState(true);
@@ -41,7 +41,7 @@ export default function Single() {
          } else if (win === "false") {
              myWin = false
          }
-            //fixing radio boolean issue
+         
       let myChange
       if (change === "true") {
           myChange = true
@@ -50,7 +50,6 @@ export default function Single() {
       }
     getCurrentUser()
       .then((data) => {
-        console.log(data.data.data);
         let userId = data.data.data[0].id;
         setUserId(userId);
       })
@@ -73,7 +72,6 @@ export default function Single() {
             }
           )
           .then((data) => {
-            console.log("doubles posted", data.data.data);
             window.location.replace("/profile")
           })
           .catch((err) => {
@@ -101,17 +99,28 @@ export default function Single() {
       const partner = e.target.value
       setPartner(partner)
   }
+  
+  const onDateChange = (e) => {
+    const date = e.target.value;
+    setStartDate(date);
+  };
 
 
   return (
     <>
       <Stack spacing={4}>
         <Flex>
-        <Text>Match Date: </Text> <Spacer />
-        <DatePicker
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
-        />
+        <FormControl>
+              <InputGroup>
+                <Input
+                  type="date"
+                  format="MM/dd/yyyy"
+                  placeholder="Match Date"
+                  name="date"
+                  onChange={onDateChange}
+                />
+              </InputGroup>
+            </FormControl>
         </Flex>
         <FormControl isRequired>
           <InputGroup>

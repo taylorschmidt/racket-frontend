@@ -60,6 +60,11 @@ export default function show() {
     setPartner(partner)
 }
 
+const onDateChange = (e) => {
+    const date = e.target.value;
+    setStartDate(date);
+  };
+
   const onSubmitEdit = () => {
     let myWin
     if (win === "true") {
@@ -165,14 +170,31 @@ export default function show() {
   const editDisplay = () => {
     return (
       <>
-      <div><Center m={2}>Edit Match</Center></div>
+      <div>
+          <Center m={2}>
+            <h1>You're editing data for this match:</h1>
+          </Center>
+          <p>Date: {pageData.date}</p>
+          <p>Opponent: {pageData.opponent}</p>
+          <p>Partner: {pageData.partner}</p>
+          <p>Hand: {pageData.hand}</p>
+          <p>Score: {pageData.score}</p>
+          <p>Notes: {pageData.notes}</p>
+          <br></br>
+        </div>
         <Stack spacing={4}>
         <Flex>
-        <Text>Match Date: </Text> <Spacer />
-        <DatePicker
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
-        />
+        <FormControl>
+              <InputGroup>
+                <Input
+                  type="date"
+                  format="MM/dd/yyyy"
+                  placeholder="Match Date"
+                  name="date"
+                  onChange={onDateChange}
+                />
+              </InputGroup>
+            </FormControl>
         </Flex>
           <FormControl isRequired>
             <InputGroup>
@@ -181,7 +203,7 @@ export default function show() {
                 type="text"
                 placeholder="Opponent"
                 aria-label="Opponent"
-                defaultValue={pageData.opponent}
+                value={opponent}
                 onChange={onChangeOpponent}
               />
             </InputGroup>
@@ -191,17 +213,17 @@ export default function show() {
               type="text"
               placeholder="Partner"
               aria-label="Partner"
-              defaultValue={pageData.partner}
+              value={partner}
               onChange={onChangePartner}
             />
           </InputGroup>
-          <RadioGroup borderWidth="2px" borderRadius="lg" overflow="hidden" p="2" w="100%" m={2} onChange={setHand} defaultValue={pageData.hand}>
+          <RadioGroup borderWidth="2px" borderRadius="lg" overflow="hidden" p="2" w="100%" m={2} onChange={setHand} value={hand}>
             <Stack direction="row">
               <Radio value="forehand">Forehand</Radio>
               <Radio value="backhand">Backhand</Radio>
             </Stack>
           </RadioGroup>
-          <RadioGroup borderWidth="2px" borderRadius="lg" overflow="hidden" p="2" w="100%" m={2} onChange={setChange} defaultValue={pageData.change}>
+          <RadioGroup borderWidth="2px" borderRadius="lg" overflow="hidden" p="2" w="100%" m={2} onChange={setChange} value={change}>
             <Stack direction="row">
               <Radio value="true">Changed Hands</Radio>
               <Radio value="false">Did Not Change Hands</Radio>
@@ -213,11 +235,11 @@ export default function show() {
                 type="text"
                 placeholder="Score"
                 aria-label="Score"
-                defaultValue={pageData.score}
+                value={score}
                 onChange={onChangeScore}
               />
             </InputGroup>
-            <RadioGroup borderWidth="2px" borderRadius="lg" overflow="hidden" p="2" w="100%" m={2} onChange={setWin} defaultValue={pageData.win}>
+            <RadioGroup borderWidth="2px" borderRadius="lg" overflow="hidden" p="2" w="100%" m={2} onChange={setWin} value={win}>
               <Stack direction="row">
                 <Radio value="true">Win</Radio>
                 <Radio value="false">Loss</Radio>
@@ -225,7 +247,7 @@ export default function show() {
             </RadioGroup>
             <Text mb="8px">Notes: </Text>
             <Textarea
-              defaultValue={pageData.notes}
+              value={notes}
               onChange={onChangeNotes}
               placeholder="Record any notes here."
               size="sm"

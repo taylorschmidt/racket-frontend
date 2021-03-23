@@ -18,19 +18,19 @@ import {
   Spacer,
   Box,
   Center,
-  useColorMode
+  useColorMode,
 } from "@chakra-ui/react";
 import { InfoIcon, EmailIcon, LockIcon } from "@chakra-ui/icons";
 import DatePicker from "react-datepicker";
 import { getCurrentUser } from "../services/user.services";
 
 export default function show() {
-const { colorMode } = useColorMode()
+  const { colorMode } = useColorMode();
   const { query } = useRouter();
   const [newEdit, setNewEdit] = useState(false);
   const [loading, setLoading] = useState(true);
   const [pageData, setPageData] = useState(undefined);
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState("");
   const [opponent, setOpponent] = useState("");
   const [score, setScore] = useState("");
   const [win, setWin] = useState(undefined);
@@ -52,12 +52,17 @@ const { colorMode } = useColorMode()
     setNotes(notes);
   };
 
+  const onDateChange = (e) => {
+    const date = e.target.value;
+    setStartDate(date);
+  };
+
   const onSubmitEdit = () => {
-    let myWin
+    let myWin;
     if (win === "true") {
-        myWin = true
+      myWin = true;
     } else if (win === "false") {
-        myWin = false
+      myWin = false;
     }
     getCurrentUser()
       .then((data) => {
@@ -75,7 +80,7 @@ const { colorMode } = useColorMode()
               score: score,
               notes: notes,
               win: myWin,
-              date: startDate
+              date: startDate,
             },
             {
               withCredentials: true,
@@ -83,7 +88,7 @@ const { colorMode } = useColorMode()
           )
           .then((data) => {
             console.log("singles updated", data.data.data);
-            window.location.replace("/profile")
+            window.location.replace("/profile");
           })
           .catch((err) => {
             console.log(err);
@@ -92,10 +97,20 @@ const { colorMode } = useColorMode()
   };
 
   const deleteMatch = () => {
-    axios.delete(process.env.NEXT_PUBLIC_BACKEND_URL + `/api/v1/singles/${query.id}`, {
-        withCredentials: true,
-      }).then(data=>{console.log('deleted match', data)}).then(()=>{window.location.replace("/profile")})
-}
+    axios
+      .delete(
+        process.env.NEXT_PUBLIC_BACKEND_URL + `/api/v1/singles/${query.id}`,
+        {
+          withCredentials: true,
+        }
+      )
+      .then((data) => {
+        console.log("deleted match", data);
+      })
+      .then(() => {
+        window.location.replace("/profile");
+      });
+  };
   const setEdit = () => {
     setNewEdit(true);
   };
@@ -103,60 +118,86 @@ const { colorMode } = useColorMode()
   const display = () => {
     return (
       <>
-        <Flex borderWidth="2px" borderRadius="lg" overflow="hidden" p="2" w="100%" m={2}>
-            <Box>
-             <div>{pageData.date}</div>
-              {pageData.opponent && <div>Opponent: {pageData.opponent}</div>}
-              <div>Partner: {pageData.parner}</div>
-              <div>Score: {pageData.score}</div>
-              {pageData.win && <div>Win</div>}
-              {!pageData.win && <div>Loss</div>}
-              {pageData.notes && <div>Notes: {pageData.notes}</div>}
-
-            </Box>
-            <Spacer />
-            <Box>
-            <Button 
-                 bg="1"
-                 _hover={{ background: "2", boxShadow: "lg" }}
-                 color="white"
-                 type="submit"
-                 variant="solid"
-                 variantColor="red"
-                 boxShadow="sm"
-                 _active={{ boxShadow: "lg" }}
-                 onClick={setEdit}
-              >
-                Edit Match
-              </Button>
-              <Button 
-                 bg="1"
-                 _hover={{ background: "2", boxShadow: "lg" }}
-                 color="white"
-                 type="submit"
-                 variant="solid"
-                 variantColor="red"
-                 boxShadow="sm"
-                 _active={{ boxShadow: "lg" }}
-               onClick={deleteMatch}>Delete Match</Button>
-            </Box>
+        <Flex
+          borderWidth="2px"
+          borderRadius="lg"
+          overflow="hidden"
+          p="2"
+          w="100%"
+          m={2}
+        >
+          <Box>
+            <div>{pageData.date}</div>
+            {pageData.opponent && <div>Opponent: {pageData.opponent}</div>}
+            <div>Partner: {pageData.parner}</div>
+            <div>Score: {pageData.score}</div>
+            {pageData.win && <div>Win</div>}
+            {!pageData.win && <div>Loss</div>}
+            {pageData.notes && <div>Notes: {pageData.notes}</div>}
+          </Box>
+          <Spacer />
+          <Box>
+            <Button
+              bg="1"
+              _hover={{ background: "2", boxShadow: "lg" }}
+              color="white"
+              type="submit"
+              variant="solid"
+              variantColor="red"
+              boxShadow="sm"
+              _active={{ boxShadow: "lg" }}
+              onClick={setEdit}
+            >
+              Edit Match
+            </Button>
+            <Button
+              bg="1"
+              _hover={{ background: "2", boxShadow: "lg" }}
+              color="white"
+              type="submit"
+              variant="solid"
+              variantColor="red"
+              boxShadow="sm"
+              _active={{ boxShadow: "lg" }}
+              onClick={deleteMatch}
+            >
+              Delete Match
+            </Button>
+          </Box>
         </Flex>
       </>
     );
   };
 
+  console.log("here is the date", startDate);
+
   const editDisplay = () => {
     return (
       <>
-        <div><Center m={2}>Edit Match</Center></div>
+        <div>
+          <Center m={2}>
+            <h1>You're editing data for this match:</h1>
+          </Center>
+          <p>Date: {pageData.date}</p>
+          <p>Opponent: {pageData.opponent}</p>
+          <p>Score: {pageData.score}</p>
+          <p>Notes: {pageData.notes}</p>
+          <br></br>
+        </div>
         <Stack spacing={4}>
-        <Flex>
-        <Text>Match Date: </Text> <Spacer />
-        <DatePicker
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
-        />
-        </Flex>
+          <Flex>
+            <FormControl>
+              <InputGroup>
+                <Input
+                  type="date"
+                  format="MM/dd/yyyy"
+                  placeholder="Match Date"
+                  name="date"
+                  onChange={onDateChange}
+                />
+              </InputGroup>
+            </FormControl>
+          </Flex>
           <FormControl isRequired>
             <InputGroup>
               <InputLeftElement children={<>🎾</>} />
@@ -164,7 +205,7 @@ const { colorMode } = useColorMode()
                 type="text"
                 placeholder="Opponent"
                 aria-label="Opponent"
-                defaultValue={pageData.opponent}
+                value={opponent}
                 onChange={onChangeOpponent}
               />
             </InputGroup>
@@ -174,18 +215,27 @@ const { colorMode } = useColorMode()
                 type="text"
                 placeholder="Score"
                 aria-label="Score"
-                defaultValue={pageData.score}
+                value={score}
                 onChange={onChangeScore}
               />
             </InputGroup>
-            <RadioGroup borderWidth="2px" borderRadius="lg" overflow="hidden" p="2" w="100%" m={2} onChange={setWin} defaultValue={pageData.wine}>
+            <RadioGroup
+              borderWidth="2px"
+              borderRadius="lg"
+              overflow="hidden"
+              p="2"
+              w="100%"
+              m={2}
+              onChange={setWin}
+              value={win}
+            >
               <Stack direction="row">
-                <Radio value='true'>Win</Radio>
-                <Radio value='false'>Loss</Radio>
+                <Radio value="true">Win</Radio>
+                <Radio value="false">Loss</Radio>
               </Stack>
             </RadioGroup>
             <Textarea
-              defaultValue={pageData.notes}
+              value={notes}
               onChange={onChangeNotes}
               placeholder="Notes"
               size="sm"
@@ -210,9 +260,12 @@ const { colorMode } = useColorMode()
 
   useEffect(() => {
     axios
-      .get(process.env.NEXT_PUBLIC_BACKEND_URL + `/api/v1/singles/${query.id}`, {
-        withCredentials: true,
-      })
+      .get(
+        process.env.NEXT_PUBLIC_BACKEND_URL + `/api/v1/singles/${query.id}`,
+        {
+          withCredentials: true,
+        }
+      )
       .then((data) => {
         console.log("singles match data", data.data.data);
         setPageData(data.data.data);
@@ -229,15 +282,23 @@ const { colorMode } = useColorMode()
     <>
       {loading && !newEdit && <>Loading...</>}
       {!loading && !newEdit && <>{display()}</>}
-      {newEdit && <>
-        <Box w="100%" mt={5}>
+      {newEdit && (
+        <>
+          <Box w="100%" mt={5}>
             <Center>
-            <Box w="400px" bg={colorMode === "light" ? "gray.200" : "gray.600" } p={3} boxShadow="sm" rounded="lg">
-      {editDisplay()}
-      </Box>
-      </Center>
-      </Box>
-      </>}
+              <Box
+                w="400px"
+                bg={colorMode === "light" ? "gray.200" : "gray.600"}
+                p={3}
+                boxShadow="sm"
+                rounded="lg"
+              >
+                {editDisplay()}
+              </Box>
+            </Center>
+          </Box>
+        </>
+      )}
     </>
   );
 }

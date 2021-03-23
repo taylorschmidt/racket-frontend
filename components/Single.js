@@ -22,7 +22,7 @@ import DatePicker from "react-datepicker";
 import { getCurrentUser } from "../services/user.services";
 
 export default function Single() {
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState("");
   const [opponent, setOpponent] = useState("");
   const [score, setScore] = useState("");
   const [win, setWin] = useState(undefined);
@@ -83,18 +83,27 @@ export default function Single() {
     setNotes(notes);
   };
 
+  const onDateChange = (e) => {
+    const date = e.target.value;
+    setStartDate(date);
+  };
 
-  console.log(win);
 
   return (
     <>
       <Stack spacing={4}>
       <Flex>
-        <Text>Match Date: </Text> <Spacer />
-        <DatePicker
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
-        />
+      <FormControl>
+              <InputGroup>
+                <Input
+                  type="date"
+                  format="MM/dd/yyyy"
+                  placeholder="Match Date"
+                  name="date"
+                  onChange={onDateChange}
+                />
+              </InputGroup>
+            </FormControl>
         </Flex>
         <FormControl isRequired>
           <InputGroup>
