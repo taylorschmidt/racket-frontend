@@ -1,13 +1,13 @@
 import Head from 'next/head'
 import {useEffect} from 'react'
-import {Button, Box, Center} from '@chakra-ui/react'
+import {Button, Box, Center, Image} from '@chakra-ui/react'
 
 export default function Home() {
   return (
     <>
-    <Box>
+     <Box w="100%" m={5}>
       <Center>
-        <Box> Welcome to Courtside!</Box>
+        <Box><Center><Image src="/Courtside.png"></Image></Center></Box>
       </Center>
     </Box>
     </>
