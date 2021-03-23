@@ -90,6 +90,7 @@ const onDateChange = (e) => {
             process.env.NEXT_PUBLIC_BACKEND_URL + `/api/v1/doubles/${query.id}`,
             {
               person_id: userId,
+              date: startDate,
               opponent: opponent,
               partner: partner,
               hand: hand,

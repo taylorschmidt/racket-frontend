@@ -49,6 +49,7 @@ export default function Single() {
             process.env.NEXT_PUBLIC_BACKEND_URL + `/api/v1/singles/`,
             {
               person_id: userId,
+              date: startDate,
               opponent: opponent,
               score: score,
               notes: notes,

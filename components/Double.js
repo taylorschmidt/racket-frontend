@@ -59,6 +59,7 @@ export default function Single() {
             process.env.NEXT_PUBLIC_BACKEND_URL + `/api/v1/doubles/`,
             {
               person_id: userId,
+              date: startDate,
               opponent: opponent,
               partner: partner,
               hand: hand,
@@ -96,15 +97,16 @@ export default function Single() {
   };
 
   const onChangePartner = (e) => {
-      const partner = e.target.value
-      setPartner(partner)
+      const test = e.target.value
+      setPartner(test)
   }
-  
+
   const onDateChange = (e) => {
     const date = e.target.value;
     setStartDate(date);
   };
 
+  console.log('partner', partner)
 
   return (
     <>

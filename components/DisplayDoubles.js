@@ -18,7 +18,7 @@ export default function DisplayDoubles({doubles}) {
             <Box>
              <div>{match.date}</div>
               {match.opponent && <div>Opponent: {match.opponent}</div>}
-              <div>Partner: {match.parner}</div>
+              <div>Partner: {match.partner}</div>
               <div>Score: {match.score}</div>
               {match.win && <div>Win</div>}
               {!match.win && <div>Loss</div>}
