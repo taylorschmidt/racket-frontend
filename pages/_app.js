@@ -37,10 +37,7 @@ function MyApp({ Component, pageProps }) {
       {isUser && (<Layout />)}
 				{!isUser && (<NoUserLayout />)}
       <Flex>
-			
-						<Component {...pageProps} />
-
-				
+						<Component {...pageProps} />				
 			</Flex>
     </ChakraProvider>
   );

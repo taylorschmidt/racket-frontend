@@ -127,7 +127,7 @@ export default function show() {
           m={2}
         >
           <Box>
-            <div>{pageData.date}</div>
+          <div>{pageData.date.substring(0, pageData.date.length - 13)}</div>
             {pageData.opponent && <div>Opponent: {pageData.opponent}</div>}
             <div>Partner: {pageData.parner}</div>
             <div>Score: {pageData.score}</div>
@@ -178,7 +178,7 @@ export default function show() {
           <Center m={2}>
             <h1>You're editing data for this match:</h1>
           </Center>
-          <p>Date: {pageData.date}</p>
+          <p>Date: {pageData.date.substring(0, pageData.date.length - 13)}</p>
           <p>Opponent: {pageData.opponent}</p>
           <p>Score: {pageData.score}</p>
           <p>Notes: {pageData.notes}</p>

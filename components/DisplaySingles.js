@@ -18,11 +18,12 @@ export default function DisplaySingles({ singles }) {
             window.location.reload();
           });
       };
+      let dateString = match.date
       return (
         <>
         <Flex flexWrap="wrap" borderWidth="2px" borderRadius="lg" overflow="hidden" p="2" w="100%" m={2}>
             <Box>
-             <div>{match.date}</div>
+             <div>{dateString.substring(0, dateString.length - 13)}</div>
               {match.opponent && <div>Opponent: {match.opponent}</div>}
               <div>Score: {match.score}</div>
               {match.win && <div>Win</div>}

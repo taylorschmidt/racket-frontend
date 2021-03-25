@@ -127,7 +127,7 @@ const onDateChange = (e) => {
     return (
         <Flex borderWidth="2px" borderRadius="lg" overflow="hidden" p="2" w="100%" m={2}>
             <Box>
-             <div>{pageData.date}</div>
+            <div>{pageData.date.substring(0, pageData.date.length - 13)}</div>
               {pageData.opponent && <div>Opponent: {pageData.opponent}</div>}
               <div>Partner: {pageData.parner}</div>
               <div>Score: {pageData.score}</div>
@@ -175,7 +175,7 @@ const onDateChange = (e) => {
           <Center m={2}>
             <h1>You're editing data for this match:</h1>
           </Center>
-          <p>Date: {pageData.date}</p>
+          <p>Date: {pageData.date.substring(0, pageData.date.length - 13)}</p>
           <p>Opponent: {pageData.opponent}</p>
           <p>Partner: {pageData.partner}</p>
           <p>Hand: {pageData.hand}</p>
