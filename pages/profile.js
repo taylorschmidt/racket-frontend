@@ -5,7 +5,7 @@ import {
   getSinglesMatches,
   getDoublesMatches,
 } from "../services/user.services";
-import { Box, Center, VStack, Text } from "@chakra-ui/react";
+import { Box, Center, VStack, Text, Button } from "@chakra-ui/react";
 import DisplaySingles from "../components/DisplaySingles";
 import DisplayDoubles from "../components/DisplayDoubles";
 import SinglesStats from "../components/SinglesStats"
@@ -17,6 +17,8 @@ export default function profile() {
   const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState(undefined);
   const [startDate, setStartDate] = useState(new Date());
+  const [displaySingles, setDisplaySingles] = useState(false)
+  const [displayDoubles, setDisplayDoubles] = useState(false)
 
   useEffect(() => {
     getCurrentUser().then(
@@ -51,6 +53,13 @@ export default function profile() {
       });
   }, []);
 
+  const displaySinglesMatches = () => {
+    setDisplaySingles(true)
+  }
+  const displayDoublesMatches = () => {
+    setDisplayDoubles(true)
+  }
+
   return (
     <>
       {loading && <div>Loading...</div>}
@@ -58,14 +67,19 @@ export default function profile() {
         <Box w="100%" m={5}>
             <Center><Text>{currentUser[0].username}'s Profile: </Text></Center>
           <Center>
+            My Stats
           <SinglesStats data={singles} doubles={doubles}/>
           </Center>
-          <Box w="100%">
+          {!displaySingles && (<Button onClick={displaySinglesMatches}>Display Singles Matches</Button>)}
+          {displaySingles && (<Box w="100%">
             <DisplaySingles singles={singles} />
-          </Box>
-          <Box w="100%">
+          </Box>)}
+          {!displayDoubles && (<Button onClick={displayDoublesMatches}>Display Doubles Matches</Button>)}
+          {displayDoubles && (<Box w="100%">
             <DisplayDoubles doubles={doubles} />
-          </Box>
+          </Box>)}
+          
+        
         
         </Box>
       )}

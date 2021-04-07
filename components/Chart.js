@@ -25,8 +25,8 @@ const SinglesChart = ({
   doublesWins,
   doublesLosses,
 }) => {
-  let backhandPercentage = backhandWin / doublesData.length;
-  let forehandPercentage = forehandWin / doublesData.length;
+  let backhandPercentage = (backhandWin / doublesData.length) * 100;
+  let forehandPercentage = (forehandWin / doublesData.length) * 100;
 
   console.log("percentage!", backhandPercentage);
   console.log("percentage!", forehandPercentage);
@@ -66,9 +66,17 @@ const SinglesChart = ({
 
   const barChart = {
     labels: ["Forehand", "Backhand"],
+    options: {
+      plugins: {
+          title: {
+              display: true,
+              text: 'Custom Chart Title'
+          }
+      }
+  },
     datasets: [
       {
-        label: "Percent Matches Won",
+        label: "Percent Doubles Matches Won",
         data: [forehandPercentage, backhandPercentage],
         backgroundColor: ["#008566", "#C6ED2C"],
         hoverBackgroundColor: ["#00a67f", "#dfff4f"],
