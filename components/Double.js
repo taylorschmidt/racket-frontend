@@ -120,6 +120,8 @@ export default function Single() {
                   placeholder="Match Date"
                   name="date"
                   onChange={onDateChange}
+                  mb={-4}
+                  focusBorderColor="#008566"
                 />
               </InputGroup>
             </FormControl>
@@ -133,6 +135,7 @@ export default function Single() {
               aria-label="Opponent"
               value={opponent}
               onChange={onChangeOpponent}
+              focusBorderColor="#008566"
             />
           </InputGroup>
           <InputGroup>
@@ -142,6 +145,7 @@ export default function Single() {
               placeholder="Partner"
               aria-label="Partner"
               value={partner}
+              focusBorderColor="#008566"
               onChange={onChangePartner}
             />
           </InputGroup>
@@ -152,23 +156,24 @@ export default function Single() {
               placeholder="Score"
               aria-label="Score"
               value={score}
+              focusBorderColor="#008566"
               onChange={onChangeScore}
             />
           </InputGroup>
-          <RadioGroup borderWidth="2px" borderRadius="lg" overflow="hidden" p="2" w="100%" m={2} onChange={setHand} value={hand}>
+          <RadioGroup colorScheme="green" focusBorderColor="#008566" borderWidth="2px" borderRadius="lg" overflow="hidden" p="2" w="100%" onChange={setHand} value={hand}>
             <Stack direction="row">
               <Radio value="forehand">Forehand</Radio>
               <Radio value="backhand">Backhand</Radio>
             </Stack>
           </RadioGroup>
-          <RadioGroup borderWidth="2px" borderRadius="lg" overflow="hidden" p="2" w="100%" m={2} onChange={setChange} value={change}>
+          <RadioGroup colorScheme="green" focusBorderColor="#008566" borderWidth="2px" borderRadius="lg" overflow="hidden" p="2" w="100%" onChange={setChange} value={change}>
             <Stack direction="row">
               <Radio value="true">Changed Hands</Radio>
               <Radio value="false">Did Not Change Hands</Radio>
             </Stack>
           </RadioGroup>
         
-          <RadioGroup borderWidth="2px" borderRadius="lg" overflow="hidden" p="2" w="100%" m={2} onChange={setWin} value={win}>
+          <RadioGroup colorScheme="green" focusBorderColor="#008566" borderWidth="2px" borderRadius="lg" overflow="hidden" p="2" w="100%" onChange={setWin} value={win}>
             <Stack direction="row">
               <Radio value="true">Win</Radio>
               <Radio value="false">Loss</Radio>
@@ -179,6 +184,7 @@ export default function Single() {
             onChange={onChangeNotes}
             placeholder="Notes"
             size="sm"
+            focusBorderColor="#008566"
           />
         </FormControl>
         <Button

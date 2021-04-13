@@ -174,7 +174,7 @@ export default function show() {
   const editDisplay = () => {
     return (
       <>
-        <div>
+     
           <Center m={2}>
             <h1>You're editing data for this match:</h1>
           </Center>
@@ -183,12 +183,13 @@ export default function show() {
           <p>Score: {pageData.score}</p>
           <p>Notes: {pageData.notes}</p>
           <br></br>
-        </div>
         <Stack spacing={4}>
           <Flex>
             <FormControl>
               <InputGroup>
                 <Input
+                focusBorderColor="#008566"
+                mb={-4}
                   type="date"
                   format="MM/dd/yyyy"
                   placeholder="Match Date"
@@ -207,6 +208,7 @@ export default function show() {
                 aria-label="Opponent"
                 value={opponent}
                 onChange={onChangeOpponent}
+                focusBorderColor="#008566"
               />
             </InputGroup>
             <InputGroup>
@@ -217,17 +219,19 @@ export default function show() {
                 aria-label="Score"
                 value={score}
                 onChange={onChangeScore}
+                focusBorderColor="#008566"
               />
             </InputGroup>
             <RadioGroup
               borderWidth="2px"
               borderRadius="lg"
               overflow="hidden"
+              colorScheme="green"
               p="2"
               w="100%"
-              m={2}
               onChange={setWin}
               value={win}
+              focusBorderColor="#008566"
             >
               <Stack direction="row">
                 <Radio value="true">Win</Radio>
@@ -239,6 +243,7 @@ export default function show() {
               onChange={onChangeNotes}
               placeholder="Notes"
               size="sm"
+              focusBorderColor="#008566"
             />
           </FormControl>
           <Button
@@ -254,6 +259,7 @@ export default function show() {
             Submit Edits
           </Button>
         </Stack>
+
       </>
     );
   };
@@ -288,7 +294,7 @@ export default function show() {
             <Center>
               <Box
                 w="400px"
-                bg={colorMode === "light" ? "gray.200" : "gray.600"}
+                bg={colorMode === "light" ? "gray.100" : "gray.600"}
                 p={3}
                 boxShadow="sm"
                 rounded="lg"

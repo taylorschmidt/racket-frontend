@@ -101,19 +101,22 @@ export default function Single() {
                   format="MM/dd/yyyy"
                   placeholder="Match Date"
                   name="date"
+                  mb={-4}
                   onChange={onDateChange}
+                  focusBorderColor="#008566"
                 />
               </InputGroup>
             </FormControl>
         </Flex>
         <FormControl isRequired>
           <InputGroup>
-            ☕
             <InputLeftElement children={<>🎾</>} />
             <Input
               type="text"
               placeholder="Opponent"
               aria-label="Opponent"
+              border="1px"
+              focusBorderColor="#008566"
               value={opponent}
               onChange={onChangeOpponent}
             />
@@ -125,19 +128,21 @@ export default function Single() {
               placeholder="Score"
               aria-label="Score"
               value={score}
+              focusBorderColor="#008566"
               onChange={onChangeScore}
             />
           </InputGroup>
-         
-          <RadioGroup borderWidth="2px" borderRadius="lg" overflow="hidden" p="2" w="100%" m={2} onChange={setWin} value={win}>
+         <InputGroup >
+          <RadioGroup focusBorderColor="#008566" colorScheme="green" borderWidth="2px" borderRadius="lg" overflow="hidden" p="2" w="110%" onChange={setWin} value={win}>
             <Stack direction="row">
               <Radio value='true'>Win</Radio>
               <Radio value='false'>Loss</Radio>
             </Stack>
           </RadioGroup>
-          
+          </InputGroup>
           
           <Textarea 
+          focusBorderColor="#008566"
             value={notes}
             onChange={onChangeNotes}
             placeholder="Notes"

@@ -189,10 +189,12 @@ const onDateChange = (e) => {
               <InputGroup>
                 <Input
                   type="date"
+                  mb={-4}
                   format="MM/dd/yyyy"
                   placeholder="Match Date"
                   name="date"
                   onChange={onDateChange}
+                  focusBorderColor="#008566"
                 />
               </InputGroup>
             </FormControl>
@@ -206,6 +208,7 @@ const onDateChange = (e) => {
                 aria-label="Opponent"
                 value={opponent}
                 onChange={onChangeOpponent}
+                focusBorderColor="#008566"
               />
             </InputGroup>
             <InputGroup>
@@ -216,15 +219,16 @@ const onDateChange = (e) => {
               aria-label="Partner"
               value={partner}
               onChange={onChangePartner}
+              focusBorderColor="#008566"
             />
           </InputGroup>
-          <RadioGroup borderWidth="2px" borderRadius="lg" overflow="hidden" p="2" w="100%" m={2} onChange={setHand} value={hand}>
+          <RadioGroup colorScheme="green" borderWidth="2px" focusBorderColor="#008566" borderRadius="lg" overflow="hidden" p="2" w="100%" onChange={setHand} value={hand}>
             <Stack direction="row">
               <Radio value="forehand">Forehand</Radio>
               <Radio value="backhand">Backhand</Radio>
             </Stack>
           </RadioGroup>
-          <RadioGroup borderWidth="2px" borderRadius="lg" overflow="hidden" p="2" w="100%" m={2} onChange={setChange} value={change}>
+          <RadioGroup colorScheme="green" borderWidth="2px" borderRadius="lg" focusBorderColor="#008566" overflow="hidden" p="2" w="100%" onChange={setChange} value={change}>
             <Stack direction="row">
               <Radio value="true">Changed Hands</Radio>
               <Radio value="false">Did Not Change Hands</Radio>
@@ -237,10 +241,11 @@ const onDateChange = (e) => {
                 placeholder="Score"
                 aria-label="Score"
                 value={score}
+                focusBorderColor="#008566"
                 onChange={onChangeScore}
               />
             </InputGroup>
-            <RadioGroup borderWidth="2px" borderRadius="lg" overflow="hidden" p="2" w="100%" m={2} onChange={setWin} value={win}>
+            <RadioGroup colorScheme="green" borderWidth="2px" focusBorderColor="#008566" borderRadius="lg" overflow="hidden" p="2" w="100%" onChange={setWin} value={win}>
               <Stack direction="row">
                 <Radio value="true">Win</Radio>
                 <Radio value="false">Loss</Radio>
@@ -249,6 +254,7 @@ const onDateChange = (e) => {
             <Text mb="8px">Notes: </Text>
             <Textarea
               value={notes}
+              focusBorderColor="#008566"
               onChange={onChangeNotes}
               placeholder="Record any notes here."
               size="sm"
@@ -295,7 +301,7 @@ const onDateChange = (e) => {
       {newEdit && <>
         <Box w="100%" mt={5}>
             <Center>
-            <Box w="400px" bg={colorMode === "light" ? "gray.200" : "gray.600" } p={3} boxShadow="sm" rounded="lg">
+            <Box w="400px" bg={colorMode === "light" ? "gray.100" : "gray.600" } p={3} boxShadow="sm" rounded="lg">
       {editDisplay()}
       </Box>
       </Center>
