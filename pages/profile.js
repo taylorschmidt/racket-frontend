@@ -47,7 +47,7 @@ export default function profile() {
       .then(() => {
         setTimeout(() => {
           setLoading(false);
-        }, 4000);
+        }, 2000);
       })
       .catch((err) => {
         console.log(err);
