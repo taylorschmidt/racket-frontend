@@ -8,7 +8,8 @@ import {
 import { Box, Center, VStack, Text, Button } from "@chakra-ui/react";
 import DisplaySingles from "../components/DisplaySingles";
 import DisplayDoubles from "../components/DisplayDoubles";
-import SinglesStats from "../components/SinglesStats"
+import SinglesStats from "../components/SinglesStats";
+import PartnerStats from "../components/PartnerStats"
 import DatePicker from "react-datepicker";
 
 export default function profile() {
@@ -17,8 +18,8 @@ export default function profile() {
   const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState(undefined);
   const [startDate, setStartDate] = useState(new Date());
-  const [displaySingles, setDisplaySingles] = useState(false)
-  const [displayDoubles, setDisplayDoubles] = useState(false)
+  const [displaySingles, setDisplaySingles] = useState(false);
+  const [displayDoubles, setDisplayDoubles] = useState(false);
 
   useEffect(() => {
     getCurrentUser().then(
@@ -44,9 +45,9 @@ export default function profile() {
         setDoubles(data.data.data);
       })
       .then(() => {
-          setTimeout(()=>{
-            setLoading(false);
-          }, 2000)
+        setTimeout(() => {
+          setLoading(false);
+        }, 4000);
       })
       .catch((err) => {
         console.log(err);
@@ -54,33 +55,47 @@ export default function profile() {
   }, []);
 
   const displaySinglesMatches = () => {
-    setDisplaySingles(true)
-  }
+    setDisplaySingles(true);
+  };
   const displayDoublesMatches = () => {
-    setDisplayDoubles(true)
-  }
+    setDisplayDoubles(true);
+  };
 
   return (
     <>
       {loading && <div>Loading...</div>}
       {!loading && (
         <Box w="100%" m={5}>
-            <Center><Text>{currentUser[0].username}'s Profile: </Text></Center>
           <Center>
-            My Stats
-          <SinglesStats data={singles} doubles={doubles}/>
+            <Text fontSize="4xl">
+              {currentUser[0].username}'s Tennis Stats:{" "}
+            </Text>
           </Center>
-          {!displaySingles && (<Button onClick={displaySinglesMatches}>Display Singles Matches</Button>)}
-          {displaySingles && (<Box w="100%">
-            <DisplaySingles singles={singles} />
-          </Box>)}
-          {!displayDoubles && (<Button onClick={displayDoublesMatches}>Display Doubles Matches</Button>)}
-          {displayDoubles && (<Box w="100%">
-            <DisplayDoubles doubles={doubles} />
-          </Box>)}
-          
-        
-        
+          <Center>
+            <SinglesStats data={singles} doubles={doubles} />
+          </Center>
+          {/* <Text>Partner Stuff Here</Text> */}
+          <PartnerStats data={doubles} />
+          {!displaySingles && (
+            <Button onClick={displaySinglesMatches}>
+              Display Singles Matches
+            </Button>
+          )}
+          {displaySingles && (
+            <Box w="100%">
+              <DisplaySingles singles={singles} />
+            </Box>
+          )}
+          {!displayDoubles && (
+            <Button onClick={displayDoublesMatches}>
+              Display Doubles Matches
+            </Button>
+          )}
+          {displayDoubles && (
+            <Box w="100%">
+              <DisplayDoubles doubles={doubles} />
+            </Box>
+          )}
         </Box>
       )}
     </>

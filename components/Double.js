@@ -22,7 +22,8 @@ import DatePicker from "react-datepicker";
 import { getCurrentUser } from "../services/user.services";
 import Calendar from 'react-calendar';
 
-export default function Single() {
+//the component to submit a doubles match
+export default function Double() {
   const [startDate, setStartDate] = useState("");
   const [opponent, setOpponent] = useState("");
   const [score, setScore] = useState("");
