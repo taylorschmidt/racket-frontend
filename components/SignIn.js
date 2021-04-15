@@ -69,6 +69,7 @@ const SignIn = () => {
                 aria-label="Email"
                 value={email}
                 onChange={onChangeEmail}
+                focusBorderColor="#008566"
               />
             </InputGroup>
           </FormControl>
@@ -81,6 +82,7 @@ const SignIn = () => {
                 aria-label="Password"
                 value={password}
                 onChange={onChangePassword}
+                focusBorderColor="#008566"
               />
             </InputGroup>
           </FormControl>
@@ -95,6 +97,7 @@ const SignIn = () => {
             boxShadow="sm"
             onClick={login}
             _active={{ boxShadow: "lg" }}
+            focusBorderColor="#008566"
           >
             Log In
           </Button>

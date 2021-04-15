@@ -69,6 +69,7 @@ const SignUp = () => {
                     <InputLeftElement children={<InfoIcon/>} />
                     <Input 
                         type="text"
+                        focusBorderColor="#008566"
                         placeholder="Username"
                         aria-label="Username"
                         value={username}
@@ -82,6 +83,7 @@ const SignUp = () => {
                     <Input 
                         type="text"
                         placeholder="Email"
+                        focusBorderColor="#008566"
                         aria-label="Email"
                         value={email}
                         onChange={onChangeEmail}
@@ -96,6 +98,7 @@ const SignUp = () => {
                         type="password"
                         placeholder="Password"
                         aria-label="Password"
+                        focusBorderColor="#008566"
                         value={password}
                         onChange={onChangePassword}
                         />
